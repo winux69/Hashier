@@ -1,0 +1,55 @@
+#!/usr/bin/python3.9
+
+#
+#
+
+#
+# This program is licenced under GNU GPL 3.0
+# Anybody can modify and redistribute it
+#
+# version: 1.0
+# developer: <winux69>
+#
+
+#
+#
+
+import os
+from os import system
+
+# hash formats can be included manually
+
+hash_formats = [
+    'md5sum',
+    'sha1sum',
+    'sha224sum',
+    'sha256sum',
+    'sha384sum',
+    'sha512sum',
+    'b2sum',
+    'cksum',
+    'base32',
+    'base64'
+]
+
+# main body
+
+while True:
+    raw_data = input ('-> ')
+    mod_raw_data = raw_data.split (' ')
+
+    def _text_format ():
+        if len (mod_raw_data) >= 1:
+            print (f'\033[0;32m{raw_data}\033[0;0m' + '\n')
+            for _temp in hash_formats:
+                system (f'printf "\033[0;33m{_temp}: \033[0;0m" && echo "{raw_data}" | {_temp} | tr -d " -"')
+
+    if len (mod_raw_data) >= 1:
+        if mod_raw_data [0] == 'file':
+            print (f'\033[0;32m{mod_raw_data [1]}\033[0;0m' + '\n')
+            for _temp in hash_formats:
+                system (f'printf "\033[0;33m{_temp}: \033[0;0m" && {_temp} {mod_raw_data [1]} | tr -d " {mod_raw_data [1]}"')
+        else:
+            _text_format ()
+    else:
+        print ('\033[0;31mYou had ONE JOB !\033[0;0m')
